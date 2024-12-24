@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merry Christmas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #ff7f50, #ff6347, #e6194B);
+            overflow: hidden;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: white;
+            text-align: center;
+        }
+        h1 {
+            font-size: 4em;
+            margin-top: 20px;
+            text-shadow: 0 0 20px #ffd700, 0 0 40px #ff4500;
+        }
+        #tree {
+            margin: 50px auto;
+            font-size: 15em;
+            cursor: pointer;
+        }
+        #gifts {
+            margin-top: 20px;
+            font-size: 3em;
+        }
+        #messageBox {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+        #closeButton {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            font-size: 1em;
+            color: white;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Merry Christmas!</h1>
+    <div id="tree" onclick="showMessage()" >🎄</div>
+    <div id="gifts"onclick="showMessage()">🎁🎁🎁</div>
+    <div id="messageBox">
+        <p>Hellooooo chúc mừng giáng sinhhhhh.Vậy là blindbox cúi cùng cũng mở rùiiiii.Chúc em 1 mùa giáng sinh anh lành hạnh phúc.Mong trời lạnh thì em sẽ bớt khóc hơn chẳng hạn hehehe.Tóm gọn là bbi Marry Christmas!!!!!!</p>
+        <button id="closeButton" onclick="closeMessage()">Đóng</button>
+    </div>
+    <script>
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        setInterval(createSnowflake, 100);
+
+        function showMessage() {
+            document.getElementById('messageBox').style.display = 'block';
+        }
+
+        function closeMessage() {
+            document.getElementById('messageBox').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
