@@ -1,107 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merry Christmas</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: radial-gradient(circle, #ff7f50, #ff6347, #e6194B);
-            overflow: hidden;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            color: white;
-            text-align: center;
-        }
-        h1 {
-            font-size: 4em;
-            margin-top: 20px;
-            text-shadow: 0 0 20px #ffd700, 0 0 40px #ff4500;
-        }
-        #tree {
-            margin: 50px auto;
-            font-size: 15em;
-            cursor: pointer;
-        }
-        #gifts {
-            margin-top: 20px;
-            font-size: 3em;
-        }
-        #messageBox {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(255, 255, 255, 0.9);
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            display: none;
-            z-index: 1000;
-        }
-        #closeButton {
-            margin-top: 10px;
-            padding: 5px 10px;
-            background-color: #ff6347;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            font-size: 1em;
-            color: white;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merry Christmas 🎄</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      overflow-x: hidden;
+    }
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1543589077-47d81606c1bf?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      opacity: 0.25;
+      z-index: -1;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      margin-bottom: 1rem;
+    }
+    p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 1.8rem;
+      border-radius: 999px;
+      background: #c0392b;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      background: #e74c3c;
+    }
+    section {
+      padding: 4rem 1.5rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 16px;
+      object-fit: cover;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  
+    /* Modal styles */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+    .modal.show { display: flex; }
+    .modal-content {
+      background: linear-gradient(180deg, #1e3c4a, #16222a);
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      padding: 2rem 2.2rem 2.4rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      position: relative;
+      animation: pop 0.35s ease;
+    }
+    @keyframes pop {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .close {
+      position: absolute;
+      right: 16px;
+      top: 12px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      opacity: 0.8;
+    }
+    .close:hover { opacity: 1; }
+  </style>
 </head>
 <body>
-    <h1>Merry Christmas!</h1>
-    <div id="tree" onclick="showMessage()" >🎄</div>
-    <div id="gifts"onclick="showMessage()">🎁🎁🎁</div>
-    <div id="messageBox">
-        <p>Hellooooo chúc mừng giáng sinhhhhh.Vậy là blindbox cúi cùng cũng mở rùiiiii.Chúc em 1 mùa giáng sinh anh lành hạnh phúc.Mong trời lạnh thì em sẽ bớt khóc hơn chẳng hạn hehehe.Tóm gọn là bbi Marry Christmas!!!!!!</p>
-        <button id="closeButton" onclick="closeMessage()">Đóng</button>
+  <header>
+    <div>
+      <h1>Merry Christmas 🎄</h1>
+      <p>
+        Gửi đến <strong> "Bé Cá"  </strong> — 
+        đây là một món quà nhỏ, được làm riêng chỉ để nói rằng: 
+        Giáng sinh này trở nên ấm áp hơn khi có em.
+      </p>
+      <button class="btn" id="openModal">Mở lời nhắn 💌</button>
     </div>
-    <script>
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.className = 'snowflake';
-            snowflake.textContent = '❄';
-            snowflake.style.left = Math.random() * 100 + 'vw';
-            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+  </header>
 
-            document.body.appendChild(snowflake);
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2 style="font-family: Playfair Display, serif;">Một chút điều muốn nói</h2>
+      <p>
+        Chúc em sẽ có 1 giáng sinh êm ấm dịu dàng, hehe phải là cười tươi lên đó
+        chuyện gì buồn hay không thì cũng qua rồi. Em không cô đơn lúc nào anh
+        cũng ở đó nghe em nói cả ngày cả đêm cũng được luôn cơ hehehehe..
+        FQChunwLuv
+      </p>
+      <p>
+        Chúc em một mùa Noel an lành,
+        nhiều nụ cười và những khoảnh khắc đáng nhớ em nhé ✨
+      </p>
+    </div>
+  </div>
 
-            setTimeout(() => {
-                snowflake.remove();
-            }, 5000);
-        }
+  <section id="message">
+    <div class="card">
+      <h2 style="font-family: Playfair Display, serif;">Chia sẻ 1 chút nho</h2>
+      <p>
+      Cảm ơn đã xuất hiện ở đây hehe, có nhiều điều muốn nói lắm 
+          nhưng mà thiệt sự anh không biết phỉa diễn tả như nào. Dù sao cũng phải cảm 
+      ơn em rất nhìu ạaa
+      </p>
+      <p>
+        Hy vọng khi em đọc đến đây,
+        em sẽ mỉm cười — vậy là món quà này đã hoàn thành nhiệm vụ rồi.
+      </p>
+    </div>
+  </section>
 
-        setInterval(createSnowflake, 100);
+  <section>
+    <div class="card">
+      <h2 style="font-family: Playfair Display, serif;">Our Memories</h2>
+      <div class="gallery">
+        <img src="images/1a7cdc98-e7ed-4a04-8073-bb1f7955a3cc.jpg"/>
+        <img src="images/2256c206-258b-4d34-8595-618630974885.jpg"/>
+        <img src="59603fc8-fd9e-4a42-ae62-56ead7654cad.jpg"/>
+      </div>
+      <p style="margin-top:1.2rem; opacity:0.85;"></p>
+    </div>
+  </section>
 
-        function showMessage() {
-            document.getElementById('messageBox').style.display = 'block';
-        }
+  <footer>
+    I Love you Bae ✨<br/>
+    From QChun w Luv
+  </footer>
+  <script>
+    const modal = document.getElementById('modal');
+    const openBtn = document.getElementById('openModal');
+    const closeBtn = document.getElementById('closeModal');
 
-        function closeMessage() {
-            document.getElementById('messageBox').style.display = 'none';
-        }
-    </script>
+    openBtn.addEventListener('click', () => {
+      modal.classList.add('show');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('show');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('show');
+    });
+  </script>
 </body>
 </html>
